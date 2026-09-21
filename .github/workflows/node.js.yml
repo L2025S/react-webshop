@@ -8,50 +8,46 @@ on:
 
 jobs:
   frontend:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04   
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: 22.x
+          node-version: 22
+          cache: npm
 
       - name: Install frontend dependencies
-        run: |
-          cd webshop-frontend
-          npm ci
+        working-directory: webshop-frontend
+        run: npm ci
 
       - name: Build frontend
-        run: |
-          cd webshop-frontend
-          npm run build
+        working-directory: webshop-frontend
+        run: npm run build
 
       - name: Test frontend
-        run: |
-          cd webshop-frontend
-          npm test --if-present
+        working-directory: webshop-frontend
+        run: npm test --if-present
 
   backend:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04   
     needs: frontend
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: 22.x
+          node-version: 22
+          cache: npm
 
       - name: Install backend dependencies
-        run: |
-          cd webshop-backend
-          npm ci
+        working-directory: webshop-backend
+        run: npm ci
 
       - name: Build backend
-        run: |
-          cd webshop-backend
-          npm run build --if-present
+        working-directory: webshop-backend
+        run: npm run build --if-present
 
       - name: Test backend
-        run: |
-          cd webshop-backend
-          npm test --if-present
+        working-directory: webshop-backend
+        run: npm test --if-present
