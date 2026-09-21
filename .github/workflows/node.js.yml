@@ -16,6 +16,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: webshop-frontend/package-lock.json
 
       - name: Install frontend dependencies
         working-directory: webshop-frontend
@@ -39,6 +40,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: webshop-backend/package-lock.json
 
       - name: Install backend dependencies
         working-directory: webshop-backend
